@@ -6,6 +6,7 @@
 package dev.mars.addressbook.util;
 
 import dev.mars.addressbook.model.Contact;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -15,6 +16,11 @@ import java.util.List;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
 
+import dev.mars.addressbook.FXMLController;
+import dev.mars.addressbook.MainApp;
+
+
+
 /**
  *
  * @author Gil
@@ -23,15 +29,18 @@ import org.apache.commons.csv.CSVRecord;
 // Class to parse the CSV file and extract the contacts
 public class ContactParser {
 
-    public List<Contact> allContacts = new ArrayList<>();
+    //public List<Contact> allContacts = new ArrayList<>();
 
     public enum Headers {
 
         NAME, GENDER, DATE_OF_BIRTH
     }
+    
+    private static List<Contact> parsedContact = new ArrayList<>();
 
-    public List<Contact> parseCSV() throws FileNotFoundException, IOException ,GenderFormatException {
-        Reader in = new FileReader("resource/csv");
+    public static List<Contact> parseCSV(File csvFile) throws FileNotFoundException, IOException ,GenderFormatException {
+        //Reader in = new FileReader("resource/csv");
+        Reader in = new FileReader(csvFile);
         Iterable<CSVRecord> records = CSVFormat.RFC4180.withHeader(Headers.class).parse(in);
         for (CSVRecord record : records) {
             Contact contact = new Contact();
@@ -51,8 +60,12 @@ public class ContactParser {
                  throw new GenderFormatException("The Gender in CSV is not correct");
              
             // add the date of birth of the contact  
-            String name = record.get(Headers.DATE_OF_BIRTH);
+            contact.setContactDob(DateUtil.parse(record.get(Headers.DATE_OF_BIRTH))); 
+            //= record.get(Headers.DATE_OF_BIRTH);
+            
+            parsedContact.add(contact);
+            
         }
-        return null;
+        return parsedContact;
     }
 }

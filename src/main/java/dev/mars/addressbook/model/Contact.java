@@ -7,6 +7,7 @@
 package dev.mars.addressbook.model;
 
 import dev.mars.addressbook.util.ContactGender;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -18,12 +19,12 @@ import java.util.Date;
 public class Contact {
     private String contactName ;
     private ContactGender contactGenger ;
-    private Date contactDob ;
+    private Calendar contactDob ;
 
     public Contact() {
     }
 
-    public Contact(String contactName, ContactGender contactGenger, Date contactDob) {
+    public Contact(String contactName, ContactGender contactGenger, Calendar contactDob) {
         this.contactName = contactName;
         this.contactGenger = contactGenger;
         this.contactDob = contactDob;
@@ -45,11 +46,11 @@ public class Contact {
         this.contactGenger = contactGenger;
     }
 
-    public Date getContactDob() {
+    public Calendar getContactDob() {
         return contactDob;
     }
 
-    public void setContactDob(Date contactDob) {
+    public void setContactDob(Calendar contactDob) {
         this.contactDob = contactDob;
     }
 
