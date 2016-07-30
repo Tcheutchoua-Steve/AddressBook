@@ -18,7 +18,15 @@
         <!-- Used as the 'Vendor' for JNLP generation -->
         <name>Mars</name>
     </organization>
-
+    
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-csv</artifactId>
+            <version>1.4</version>
+        </dependency>
+        
+    </dependencies>
     <build>
         <plugins>
             <plugin>

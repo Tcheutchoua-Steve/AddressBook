@@ -1,21 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.input.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="492.0" prefWidth="580.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="dev.mars.addressbook.FXMLController">
-  <children>
-    <Button fx:id="button" layoutX="126.0" layoutY="90.0" onAction="#handleButtonAction" text="Click Me!" />
-    <Label fx:id="label" layoutX="126.0" layoutY="120.0" minHeight="16.0" minWidth="69.0" />
-    <HBox id="HBox" alignment="CENTER" layoutX="36.0" layoutY="11.0" spacing="5.0">
-      <children>
-        <Button fx:id="buttonNumberOfMale" minHeight="17.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="105.0" text="# Males" />
-        <Button fx:id="buttonOldestPerson" mnemonicParsing="false" text="Oldest Person" />
-        <Button mnemonicParsing="false" text="DaysOlder" />
-      </children>
-    </HBox>
-  </children>
-</AnchorPane>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dev.mars.addressbook.FXMLController">
+   <top>
+      <MenuBar BorderPane.alignment="CENTER">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+                  <MenuItem fx:id="Open" mnemonicParsing="false" onAction="#handleOpen" text="Open..." />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem fx:id="exit" mnemonicParsing="false" onAction="#handleExit" text="Exit" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Operations">
+            <items>
+              <MenuItem fx:id="numberOfMales" mnemonicParsing="false" onAction="#showNumberOfMales" text="NumberOfMales" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem fx:id="oldestPerson" mnemonicParsing="false" onAction="#showOldestPerson" text="OldestPerson" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem mnemonicParsing="false" text="AgeDifference" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem fx:id="about" mnemonicParsing="false" onAction="#handleAbout" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+   </top>
+</BorderPane>
