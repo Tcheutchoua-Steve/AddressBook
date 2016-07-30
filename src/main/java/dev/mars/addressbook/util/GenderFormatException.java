@@ -14,4 +14,12 @@ public class GenderFormatException extends Exception{
     public GenderFormatException (String message){
        super(message);
     }
+
+    public GenderFormatException(String message, Throwable cause) {
+        super(message, cause);
+    }
+
+    public GenderFormatException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
+        super(message, cause, enableSuppression, writableStackTrace);
+    }
 }
