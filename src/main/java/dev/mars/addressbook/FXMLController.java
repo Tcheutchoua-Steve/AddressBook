@@ -1,7 +1,9 @@
 package dev.mars.addressbook;
 
 import dev.mars.addressbook.model.Contact;
+import dev.mars.addressbook.util.ContactGender;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -14,8 +16,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.text.Text;
 
 public class FXMLController implements Initializable {
     
@@ -41,7 +43,7 @@ public class FXMLController implements Initializable {
     @FXML
     private TableColumn<Contact, String> personDobColumn;
     @FXML
-    private TextArea messageArea;
+    private Text infoDisplayArea;
     
     
     
@@ -83,29 +85,7 @@ public class FXMLController implements Initializable {
         
        //PersonDetail.setItems(mainApp.getAllContacts());
     }    
-    
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+      
     
     @FXML
     private void handleOpen(ActionEvent event) {
@@ -117,10 +97,39 @@ public class FXMLController implements Initializable {
 
     @FXML
     private void showNumberOfMales(ActionEvent event) {
+        
+        // get contacts from the currently loaded contacts
+        List<Contact> contacts = mainApp.getAllContacts();
+        
+        // parse through the loaded contacts and find the total number of males
+        int numberOfMales = 0 ;
+        for(Contact ctc : contacts){
+            if(ctc.getContactGenger().equals(ContactGender.MALE))
+                numberOfMales ++;
+        }
+        
+        infoDisplayArea.setText("Number of males are " + numberOfMales);
     }
 
     @FXML
     private void showOldestPerson(ActionEvent event) {
+        // The oldest person is the one whose dob is the earliest 
+        List<Contact> contacts = mainApp.getAllContacts();
+        
+        Contact oldest  ; 
+        // assumes that the oldest contact is the first 
+        oldest = contacts.get(0);
+        
+        // parse through all the contacts to find the oldest contact 
+        for(Contact ctc : contacts){
+            
+            // update oldest contact if it is not the first contact 
+            if((oldest.getContactDobInCalendar()).compareTo(ctc.getContactDobInCalendar()) > 0 ){
+                oldest = ctc ;
+            }
+        }
+        
+        infoDisplayArea.setText("The  Oldest   Contact   is  " + oldest.getContactName() + "  Born   on   the   " + oldest.getContactDob());
     }
 
     @FXML

@@ -46,10 +46,15 @@ public class Contact {
         this.contactGenger = contactGenger;
     }
 
+    // This will be used by the table view 
     public String getContactDob() {
         
         return DateUtil.format(contactDob);
         //return contactDob;
+    }
+    
+    public Calendar getContactDobInCalendar(){
+        return this.contactDob;
     }
 
     public void setContactDob(Calendar contactDob) {
