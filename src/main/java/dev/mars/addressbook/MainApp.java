@@ -1,16 +1,19 @@
 package dev.mars.addressbook;
 
 import dev.mars.addressbook.model.Contact;
+import dev.mars.addressbook.util.ContactGender;
 import dev.mars.addressbook.util.ContactParser;
 import dev.mars.addressbook.util.GenderFormatException;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Calendar;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Application;
+import static javafx.application.Application.launch;
 import static javafx.application.Application.launch;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -26,10 +29,13 @@ public class MainApp extends Application  implements Initializable{
 
     private Stage primaryStage;
     
+    private static ObservableList<Contact> allContacts = FXCollections.observableArrayList(); 
+
     private BorderPane borderPane ; 
     private Parent root ; 
     
     public MainApp(){
+        allContacts.add(new Contact("Tcheutchoua Steve", ContactGender.MALE, Calendar.getInstance()));
     }
     
     @Override
@@ -44,6 +50,8 @@ public class MainApp extends Application  implements Initializable{
             
             Scene scene = new Scene(borderPane);
             //scene.getStylesheets().add("/styles/Styles.css");
+            
+            loadParsedContacts();
            stage.setScene(scene);
         //Git controller access to the Main application class 
         FXMLController controller = loader.getController();
@@ -65,7 +73,6 @@ public class MainApp extends Application  implements Initializable{
         
     }
     
-    private static ObservableList<Contact> allContacts = FXCollections.observableArrayList(); 
         
     /**
      * The main() method is ignored in correctly deployed JavaFX application.
@@ -86,19 +93,22 @@ public class MainApp extends Application  implements Initializable{
     
     public void loadParsedContacts() throws IOException{
         ClassLoader classLoader = getClass().getClassLoader();
-        File fi = new File(classLoader.getResource("src/main/resources/AddressBook.csv").getFile());
+        File fi = new File(MainApp.class.getResource("/csv/AddressBook.csv").getFile());
         try {
             allContacts.addAll(ContactParser.parseCSV(fi));
         } catch (FileNotFoundException ex) {
+            System.out.println("an error occured");
             Logger.getLogger(MainApp.class.getName()).log(Level.SEVERE, null, ex);
         } catch (GenderFormatException ex) {
+            System.out.println("an error occured");
             Logger.getLogger(MainApp.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        System.out.println("Initializing main app");
+        allContacts.add(new Contact("Tcheutchoua Steve", ContactGender.MALE, Calendar.getInstance()));
+        
                 
         try {
             System.out.println("Trying to load contacts ");

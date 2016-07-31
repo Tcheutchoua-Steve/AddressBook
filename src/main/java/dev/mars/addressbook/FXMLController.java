@@ -81,7 +81,7 @@ public class FXMLController implements Initializable {
             
         });
         
-       //PersonDetail.setItems(MainApp.g);
+       //PersonDetail.setItems(mainApp.getAllContacts());
     }    
     
 
