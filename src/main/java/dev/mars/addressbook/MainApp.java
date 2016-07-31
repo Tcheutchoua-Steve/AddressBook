@@ -12,13 +12,13 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
-import static javafx.application.Application.launch;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 
@@ -26,23 +26,46 @@ public class MainApp extends Application  implements Initializable{
 
     private Stage primaryStage;
     
+    private BorderPane borderPane ; 
+    private Parent root ; 
+    
     public MainApp(){
     }
     
     @Override
     public void start(Stage stage) throws Exception {
         
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/MainAppView.fxml"));
+        stage.setTitle("AddressBook");
+        // Load the fxml root layout 
         
-        Scene scene = new Scene(root);
-        scene.getStylesheets().add("/styles/Styles.css");
-        
-        stage.setTitle("JavaFX and Maven");
-        stage.setScene(scene);
+        try {
+            FXMLLoader loader = new FXMLLoader(MainApp.class.getResource("/fxml/MainAppView.fxml"));
+            borderPane = (BorderPane) loader.load();
+            
+            Scene scene = new Scene(borderPane);
+            //scene.getStylesheets().add("/styles/Styles.css");
+           stage.setScene(scene);
+        //Git controller access to the Main application class 
+        FXMLController controller = loader.getController();
+        controller.setMainApp(this);
         stage.show();
+        } catch (IOException ex) {
+            System.out.println("Got an exception");
+            Logger.getLogger(MainApp.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+      
+        
+        /*try {
+            System.out.println("Trying to load contacts ");
+            loadParsedContacts();
+        } catch (IOException ex) {
+            Logger.getLogger(MainApp.class.getName()).log(Level.SEVERE, null, ex);
+        }*/
+        
     }
     
-    private ObservableList<Contact> allContacts = FXCollections.observableArrayList(); 
+    private static ObservableList<Contact> allContacts = FXCollections.observableArrayList(); 
         
     /**
      * The main() method is ignored in correctly deployed JavaFX application.
@@ -75,6 +98,14 @@ public class MainApp extends Application  implements Initializable{
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("Initializing main app");
+                
+        try {
+            System.out.println("Trying to load contacts ");
+            loadParsedContacts();
+        } catch (IOException ex) {
+            Logger.getLogger(MainApp.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
 }

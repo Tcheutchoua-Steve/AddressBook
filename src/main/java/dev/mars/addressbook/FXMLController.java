@@ -19,6 +19,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 public class FXMLController implements Initializable {
     
+    private MainApp mainApp ; 
+    
     private Label label;
     @FXML
     private MenuItem Open;
@@ -48,7 +50,15 @@ public class FXMLController implements Initializable {
         label.setText("Hello World!");
     }
     
+      public void showContact(Contact ctct){
     
+    }
+      
+     public void setMainApp(MainApp mainAp){
+         this.mainApp = mainAp ;
+         PersonDetail.setItems(mainApp.getAllContacts()); 
+     }
+      
     @Override
     public void initialize(URL url, ResourceBundle rb) {
          // Initialize the person table
@@ -70,12 +80,33 @@ public class FXMLController implements Initializable {
             }
             
         });
+        
+       //PersonDetail.setItems(MainApp.g);
     }    
     
-    public void showContact(Contact ctct){
-    
-    }
 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     @FXML
     private void handleOpen(ActionEvent event) {
     }
