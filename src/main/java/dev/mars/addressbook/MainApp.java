@@ -1,14 +1,14 @@
 package dev.mars.addressbook;
 
 import dev.mars.addressbook.model.Contact;
-import dev.mars.addressbook.util.ContactGender;
 import dev.mars.addressbook.util.ContactParser;
 import dev.mars.addressbook.util.GenderFormatException;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
-import java.util.Calendar;
+import java.util.List;
+
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -26,21 +26,20 @@ import javafx.stage.Stage;
 
 public class MainApp extends Application  implements Initializable{
 
-    private Stage primaryStage;
+    private Stage stage;
     
     private static ObservableList<Contact> allContacts = FXCollections.observableArrayList(); 
 
     private static ObservableList<String> namesOfContact = FXCollections.observableArrayList();
     private BorderPane borderPane ; 
     private Parent root ; 
-    
+    FXMLController controller ; 
     public MainApp(){
-        //allContacts.add(new Contact("Tcheutchoua Steve", ContactGender.MALE, Calendar.getInstance()));
     }
     
     @Override
-    public void start(Stage stage) throws Exception {
-        
+    public void start(Stage primaryStage) throws Exception {
+        this.stage = primaryStage ;
         stage.setTitle("AddressBook");
         // Load the fxml root layout 
         
@@ -54,7 +53,7 @@ public class MainApp extends Application  implements Initializable{
             loadParsedContacts();
            stage.setScene(scene);
         //Git controller access to the Main application class 
-        FXMLController controller = loader.getController();
+        controller = loader.getController();
         controller.setMainApp(this);
         stage.show();
         } catch (IOException ex) {
@@ -62,18 +61,13 @@ public class MainApp extends Application  implements Initializable{
             Logger.getLogger(MainApp.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-      
-        
-        /*try {
-            System.out.println("Trying to load contacts ");
-            loadParsedContacts();
-        } catch (IOException ex) {
-            Logger.getLogger(MainApp.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
         
     }
     
-        
+    public Stage getPrimaryStage(){
+        return this.stage;
+    }
+       
     /**
      * The main() method is ignored in correctly deployed JavaFX application.
      * main() serves only as fallback in case the application can not be
@@ -114,15 +108,27 @@ public class MainApp extends Application  implements Initializable{
     }
 
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        //allContacts.add(new Contact("Tcheutchoua Steve", ContactGender.MALE, Calendar.getInstance()));
-        
-                
+    public void initialize(URL url, ResourceBundle rb) {   
         try {
-            //System.out.println("Trying to load contacts ");
             loadParsedContacts();
         } catch (IOException ex) {
             Logger.getLogger(MainApp.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+    
+    public void updateTable(List<Contact> newContacts){
+        ObservableList<Contact> tempList =  FXCollections.observableArrayList(newContacts);
+        if(newContacts.size() >= 0){
+            this.allContacts.removeAll(allContacts);
+            this.allContacts.clear();
+             
+            //this.allContacts.addAll(newContacts);
+            //this.allContacts = new FXCollections.observableArrayList(newContacts);
+            FXCollections.copy(this.allContacts, tempList);
+            
+           controller.setMainApp(this);
+           
         }
         
     }

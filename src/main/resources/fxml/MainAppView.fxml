@@ -26,7 +26,7 @@
                   <SeparatorMenuItem mnemonicParsing="false" />
                   <MenuItem fx:id="oldestPerson" mnemonicParsing="false" onAction="#showOldestPerson" text="OldestPerson" />
                   <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem mnemonicParsing="false" text="AgeDifference" />
+                  <MenuItem mnemonicParsing="false" onAction="#handleDaysComparison" text="AgeDifference" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Help">
@@ -42,7 +42,7 @@
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="368.0" prefWidth="334.0">
                <children>
-                  <TableView fx:id="PersonDetail" layoutX="25.0" layoutY="14.0" prefHeight="373.0" prefWidth="296.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <TableView fx:id="personDetail" layoutX="25.0" layoutY="14.0" prefHeight="373.0" prefWidth="296.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <columns>
                       <TableColumn fx:id="personNameColumn" prefWidth="101.0" text="Name" />
                       <TableColumn fx:id="personGenderColumn" prefWidth="92.0" text="Gender" />
