@@ -5,18 +5,23 @@ import dev.mars.addressbook.util.ContactGender;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.concurrent.TimeUnit;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+//import javafx.scene.control.Dialogs;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
 public class FXMLController implements Initializable {
@@ -44,6 +49,12 @@ public class FXMLController implements Initializable {
     private TableColumn<Contact, String> personDobColumn;
     @FXML
     private Text infoDisplayArea;
+    @FXML
+    private ComboBox<String> firstComboBox;
+    @FXML
+    private ComboBox<String> secondComboBox;
+    @FXML
+    private Button compareDays;
     
     
     
@@ -59,6 +70,8 @@ public class FXMLController implements Initializable {
      public void setMainApp(MainApp mainAp){
          this.mainApp = mainAp ;
          PersonDetail.setItems(mainApp.getAllContacts()); 
+         firstComboBox.setItems(mainApp.getAllNames());
+         secondComboBox.setItems(mainApp.getAllNames());
      }
       
     @Override
@@ -134,5 +147,29 @@ public class FXMLController implements Initializable {
 
     @FXML
     private void handleAbout(ActionEvent event) {
+          //      Dialogs.showInformationDialog(mainApp.getPrimaryStage(), "Author: Tcheutchoua Steve", "AddressApp", "About");
+
+    }
+
+    @FXML
+    private void handleDaysComparison(ActionEvent event) {
+        int firstbox =  firstComboBox.getSelectionModel().getSelectedIndex() ;
+        int secondbox = secondComboBox.getSelectionModel().getSelectedIndex() ; 
+        long dayDifference = 0 ;
+        if(( firstbox >= 0 ) && (secondbox >= 0)){
+            System.out.println("Item has been selected");
+            long endTime = mainApp.getAllContacts().get(firstbox).getContactDobInCalendar().getTimeInMillis();
+            long startTime = mainApp.getAllContacts().get(secondbox).getContactDobInCalendar().getTimeInMillis();
+            dayDifference = TimeUnit.MILLISECONDS.toDays((startTime) - (endTime) );
+            
+            
+            infoDisplayArea.setText("The age difference is  " + dayDifference + " days ");
+        }
+        else {
+            infoDisplayArea.setText("Please choose names from the two dropdow menu beside ");
+            infoDisplayArea.setFill(Color.RED);
+        }
+        
+        
     }
 }

@@ -30,6 +30,7 @@ public class MainApp extends Application  implements Initializable{
     
     private static ObservableList<Contact> allContacts = FXCollections.observableArrayList(); 
 
+    private static ObservableList<String> namesOfContact = FXCollections.observableArrayList();
     private BorderPane borderPane ; 
     private Parent root ; 
     
@@ -89,12 +90,20 @@ public class MainApp extends Application  implements Initializable{
         return allContacts;
     }  
     
+    public ObservableList<String> getAllNames(){
+        namesOfContact.clear();
+        for(Contact ctc : allContacts){
+            namesOfContact.add(ctc.getContactName());
+        }
+        return namesOfContact;
+    }
     
     public void loadParsedContacts() throws IOException{
         ClassLoader classLoader = getClass().getClassLoader();
         File fi = new File(MainApp.class.getResource("/csv/AddressBook.csv").getFile());
         try {
             allContacts.addAll(ContactParser.parseCSV(fi));
+            
         } catch (FileNotFoundException ex) {
             //System.out.println("an error occured");
             Logger.getLogger(MainApp.class.getName()).log(Level.SEVERE, null, ex);
@@ -106,7 +115,7 @@ public class MainApp extends Application  implements Initializable{
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        allContacts.add(new Contact("Tcheutchoua Steve", ContactGender.MALE, Calendar.getInstance()));
+        //allContacts.add(new Contact("Tcheutchoua Steve", ContactGender.MALE, Calendar.getInstance()));
         
                 
         try {

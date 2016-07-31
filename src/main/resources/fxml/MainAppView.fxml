@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.input.*?>
 <?import java.lang.*?>
@@ -8,7 +9,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dev.mars.addressbook.FXMLController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="468.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dev.mars.addressbook.FXMLController">
    <top>
       <MenuBar BorderPane.alignment="CENTER">
         <menus>
@@ -37,15 +38,15 @@
       </MenuBar>
    </top>
    <center>
-      <SplitPane dividerPositions="0.5" prefHeight="160.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <SplitPane dividerPositions="0.4283667621776504" prefHeight="160.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="368.0" prefWidth="334.0">
                <children>
                   <TableView fx:id="PersonDetail" layoutX="25.0" layoutY="14.0" prefHeight="373.0" prefWidth="296.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <columns>
-                      <TableColumn fx:id="personNameColumn" prefWidth="75.0" text="Name" />
-                      <TableColumn fx:id="personGenderColumn" prefWidth="103.0" text="Gender" />
-                        <TableColumn fx:id="personDobColumn" prefWidth="115.0" text="Date of Birth" />
+                      <TableColumn fx:id="personNameColumn" prefWidth="101.0" text="Name" />
+                      <TableColumn fx:id="personGenderColumn" prefWidth="92.0" text="Gender" />
+                        <TableColumn fx:id="personDobColumn" prefWidth="100.0" text="Date of Birth" />
                     </columns>
                   </TableView>
                </children>
@@ -53,6 +54,18 @@
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="373.0" prefWidth="319.0">
                <children>
                   <Text fx:id="infoDisplayArea" layoutY="108.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="292.13671875" />
+                  <HBox layoutX="2.0" layoutY="-3.0" prefHeight="26.0" prefWidth="393.0" spacing="5.0">
+                     <children>
+                        <ComboBox fx:id="firstComboBox" layoutY="2.0" prefHeight="25.0" prefWidth="131.0" />
+                        <Text layoutX="168.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Days Older" wrappingWidth="59.13671875" />
+                        <ComboBox fx:id="secondComboBox" layoutX="250.0" layoutY="2.0" prefHeight="25.0" prefWidth="149.0">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </ComboBox>
+                        <Button fx:id="compareDays" mnemonicParsing="false" onAction="#handleDaysComparison" text="OK" />
+                     </children>
+                  </HBox>
                </children>
             </AnchorPane>
         </items>
