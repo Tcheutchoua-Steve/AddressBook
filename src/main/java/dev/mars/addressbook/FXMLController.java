@@ -61,7 +61,7 @@ public class FXMLController implements Initializable {
       
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-         // Initialize the person table
+         // Initialize the Contact table
         personNameColumn.setCellValueFactory(new PropertyValueFactory<Contact, String>("contactName"));
         personGenderColumn.setCellValueFactory(new PropertyValueFactory<Contact, String>("contactGenger"));
         personDobColumn.setCellValueFactory(new PropertyValueFactory<Contact, String>("contactDob"));

@@ -9,7 +9,6 @@ package dev.mars.addressbook.util;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 
 /**
  *
@@ -19,7 +18,7 @@ public class DateUtil {
     /**
      * Default date format in the form 30/07/16
      */
-    private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd/MM/YY");
+    private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd/MM/yy");
 
     /**
      * Returns the given date as a well formatted string. The above defined date

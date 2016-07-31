@@ -14,7 +14,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
-import static javafx.application.Application.launch;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
@@ -35,7 +34,7 @@ public class MainApp extends Application  implements Initializable{
     private Parent root ; 
     
     public MainApp(){
-        allContacts.add(new Contact("Tcheutchoua Steve", ContactGender.MALE, Calendar.getInstance()));
+        //allContacts.add(new Contact("Tcheutchoua Steve", ContactGender.MALE, Calendar.getInstance()));
     }
     
     @Override
@@ -97,10 +96,10 @@ public class MainApp extends Application  implements Initializable{
         try {
             allContacts.addAll(ContactParser.parseCSV(fi));
         } catch (FileNotFoundException ex) {
-            System.out.println("an error occured");
+            //System.out.println("an error occured");
             Logger.getLogger(MainApp.class.getName()).log(Level.SEVERE, null, ex);
         } catch (GenderFormatException ex) {
-            System.out.println("an error occured");
+            //System.out.println("an error occured");
             Logger.getLogger(MainApp.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -111,7 +110,7 @@ public class MainApp extends Application  implements Initializable{
         
                 
         try {
-            System.out.println("Trying to load contacts ");
+            //System.out.println("Trying to load contacts ");
             loadParsedContacts();
         } catch (IOException ex) {
             Logger.getLogger(MainApp.class.getName()).log(Level.SEVERE, null, ex);
