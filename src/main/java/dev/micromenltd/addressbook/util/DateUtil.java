@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package dev.mars.addressbook.util;
+package dev.micromenltd.addressbook.util;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

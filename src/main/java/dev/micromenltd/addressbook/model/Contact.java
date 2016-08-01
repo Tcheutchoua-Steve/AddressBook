@@ -4,10 +4,10 @@
  * and open the template in the editor.
  */
 
-package dev.mars.addressbook.model;
+package dev.micromenltd.addressbook.model;
 
-import dev.mars.addressbook.util.ContactGender;
-import dev.mars.addressbook.util.DateUtil;
+import dev.micromenltd.addressbook.util.ContactGender;
+import dev.micromenltd.addressbook.util.DateUtil;
 import java.util.Calendar;
 
 /**
