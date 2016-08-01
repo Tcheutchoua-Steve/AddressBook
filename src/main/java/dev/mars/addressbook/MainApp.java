@@ -122,9 +122,9 @@ public class MainApp extends Application  implements Initializable{
         
     }
     
-    /*public void updateTable(List<Contact> newContacts){
+    public void updateTable(List<Contact> newContacts){
         ObservableList<Contact> tempList =  FXCollections.observableArrayList(newContacts);
-        if(newContacts.size() >= 0){
+        if((allContacts.size() <= 0 ) && (newContacts.size() >= 0 )){
             this.allContacts.removeAll(allContacts);
             //allContacts.setItem(null);
              
@@ -136,5 +136,5 @@ public class MainApp extends Application  implements Initializable{
            
         }
         
-    }*/
+    }
 }

@@ -121,6 +121,7 @@ public class AddressController implements Initializable {
             try {
                 ObservableList<Contact> contacts = FXCollections.observableArrayList(ContactParser.parseCSV(file));
                 //refrestTable(mainApp, (ObservableList<Contact>) contacts);
+                mainApp.updateTable(contacts);
             } catch (IOException ex) {
                 Logger.getLogger(AddressController.class.getName()).log(Level.SEVERE, null, ex);
             } catch (GenderFormatException ex) {
