@@ -1,6 +1,7 @@
-package dev.mars.addressbook;
+package dev.mars.addressbook.controller;
 
 import com.sun.javafx.scene.control.skin.TableViewSkinBase;
+import dev.mars.addressbook.MainApp;
 import dev.mars.addressbook.model.Contact;
 import dev.mars.addressbook.util.ContactGender;
 import dev.mars.addressbook.util.ContactParser;
@@ -32,7 +33,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 
-public class FXMLController implements Initializable {
+public class AddressController implements Initializable {
     
     private MainApp mainApp ; 
     
@@ -118,18 +119,19 @@ public class FXMLController implements Initializable {
 
         if (file != null) {
             try {
-                List<Contact> contacts = ContactParser.parseCSV(file);
-                mainApp.updateTable(contacts);
+                ObservableList<Contact> contacts = FXCollections.observableArrayList(ContactParser.parseCSV(file));
+                //refrestTable(mainApp, (ObservableList<Contact>) contacts);
             } catch (IOException ex) {
-                Logger.getLogger(FXMLController.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(AddressController.class.getName()).log(Level.SEVERE, null, ex);
             } catch (GenderFormatException ex) {
-                Logger.getLogger(FXMLController.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(AddressController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
 
     @FXML
     private void handleExit(ActionEvent event) {
+        // Close application
         System.exit(0);
     }
 
@@ -149,12 +151,14 @@ public class FXMLController implements Initializable {
 
             infoDisplayArea.setText("Number of males are " + numberOfMales);
         } else{
-            infoDisplayArea.setText("Please load some contacts first " + numberOfMales);
+           noContactMessage("Please Load some data before proceeding");
         }
     }
 
     @FXML
     private void showOldestPerson(ActionEvent event) {
+        
+        if(mainApp.getAllContacts().size() >= 0){
         // The oldest person is the one whose dob is the earliest 
         List<Contact> contacts = mainApp.getAllContacts();
         
@@ -172,6 +176,11 @@ public class FXMLController implements Initializable {
         }
         
         infoDisplayArea.setText("The  Oldest   Contact   is  " + oldest.getContactName() + "  Born   on   the   " + oldest.getContactDob());
+        }
+        else 
+        {
+            noContactMessage("Please Load some data before proceeding");
+        }
     }
 
     @FXML
@@ -200,23 +209,42 @@ public class FXMLController implements Initializable {
             infoDisplayArea.setText("The age difference is  " + dayDifference + " days ");
         }
         else {
-            infoDisplayArea.setText("Please choose names from the two dropdow menu beside ");
+            //infoDisplayArea.setText("Please choose names from the two dropdow menu beside ");
             //infoDisplayArea.setFill(Color.RED);
+            noContactMessage("Please choose names from the two dropdow menu ");
         }
     }
     
-    public void refrestTable(MainApp mainApp){
+    // Generalized notification message for application
+    private void noContactMessage(String message){
+        Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("No Data Found");
+            alert.setContentText(message);
+            alert.showAndWait();
+    }
+    
+    /*public void refrestTable(MainApp mainApp , ObservableList<Contact> newList )
+        
         infoDisplayArea.setText("all Contact size is  " + mainApp.getAllContacts().size());
          personDetail.getItems().clear();
          personDetail.getProperties().put(TableViewSkinBase.RECREATE, Boolean.TRUE);
-         personDetail.setItems(mainApp.getAllContacts());
+         personDetail.setItems(newList);
          firstComboBox.getItems().clear();
-         firstComboBox.getItems().addAll(mainApp.getAllNames());
+         firstComboBox.getItems().addAll(getAllNames(newList));
          secondComboBox.getItems().clear();
-         secondComboBox.getItems().addAll(mainApp.getAllNames());
+         secondComboBox.getItems().addAll(getAllNames(newList));
          
          infoDisplayArea.setText("all Contact size is  " + mainApp.getAllContacts().size());
          
     }
-
+    
+    public ObservableList<String> getAllNames(ObservableList<Contact> contacts){
+        ObservableList<String> names = null;
+        for(Contact ctc : contacts){
+            names.add(ctc.getContactName());
+        }
+        return names;
+    }
+*/
 }

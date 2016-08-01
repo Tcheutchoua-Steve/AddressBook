@@ -16,7 +16,7 @@ import java.util.List;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
 
-import dev.mars.addressbook.FXMLController;
+import dev.mars.addressbook.controller.AddressController;
 import dev.mars.addressbook.MainApp;
 
 
@@ -32,7 +32,8 @@ public class ContactParser {
     //public List<Contact> allContacts = new ArrayList<>();
 
     public enum Headers {
-
+        
+        // Specifies the order of the csv file data
         NAME, GENDER, DATE_OF_BIRTH
     }
     

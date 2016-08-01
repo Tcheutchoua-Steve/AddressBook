@@ -53,6 +53,7 @@ public class Contact {
         //return contactDob;
     }
     
+    // Calendar Object that will be used for mathematical operations
     public Calendar getContactDobInCalendar(){
         return this.contactDob;
     }
@@ -60,15 +61,5 @@ public class Contact {
     public void setContactDob(Calendar contactDob) {
         this.contactDob = contactDob;
     }
-
-    @Override
-    public String toString() {
-        //return super.toString(); //To change body of generated methods, choose Tools | Templates.
-        return "Name : " + getContactName()+ "\n" +
-                "Gender" + getContactGenger() + "\n" + 
-                "Date of Birth"  ;
-    }
-    
-    
     
 }

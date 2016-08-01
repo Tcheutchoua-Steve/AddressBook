@@ -10,6 +10,8 @@ package dev.mars.addressbook.util;
  *
  * @author Gil
  */
+
+// Exception to be fired if the gender does not match that defined or expected
 public class GenderFormatException extends Exception{
     public GenderFormatException (String message){
        super(message);

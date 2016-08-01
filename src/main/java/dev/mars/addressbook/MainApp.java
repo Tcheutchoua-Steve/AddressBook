@@ -1,5 +1,6 @@
 package dev.mars.addressbook;
 
+import dev.mars.addressbook.controller.AddressController;
 import dev.mars.addressbook.model.Contact;
 import dev.mars.addressbook.util.ContactParser;
 import dev.mars.addressbook.util.GenderFormatException;
@@ -33,7 +34,7 @@ public class MainApp extends Application  implements Initializable{
     private static ObservableList<String> namesOfContact = FXCollections.observableArrayList();
     private BorderPane borderPane ; 
     private Parent root ; 
-    FXMLController controller ; 
+    AddressController controller ; 
     public MainApp(){
     }
     
@@ -80,10 +81,12 @@ public class MainApp extends Application  implements Initializable{
         launch(args);
     }
 
+    // return all the conctacts that are loaded
     public ObservableList<Contact> getAllContacts() {
         return allContacts;
     }  
     
+    // return all the names of the loaded contacts
     public ObservableList<String> getAllNames(){
         namesOfContact.clear();
         for(Contact ctc : allContacts){
@@ -92,6 +95,8 @@ public class MainApp extends Application  implements Initializable{
         return namesOfContact;
     }
     
+    
+    // Get all contacts from the defined csv file 
     public void loadParsedContacts() throws IOException{
         ClassLoader classLoader = getClass().getClassLoader();
         File fi = new File(MainApp.class.getResource("/csv/AddressBook.csv").getFile());
@@ -117,19 +122,19 @@ public class MainApp extends Application  implements Initializable{
         
     }
     
-    public void updateTable(List<Contact> newContacts){
+    /*public void updateTable(List<Contact> newContacts){
         ObservableList<Contact> tempList =  FXCollections.observableArrayList(newContacts);
         if(newContacts.size() >= 0){
             this.allContacts.removeAll(allContacts);
-            this.allContacts.clear();
+            //allContacts.setItem(null);
              
-            //this.allContacts.addAll(newContacts);
+            allContacts.addAll(newContacts);
             //this.allContacts = new FXCollections.observableArrayList(newContacts);
-            FXCollections.copy(this.allContacts, tempList);
+            //FXCollections.copy(this.allContacts, tempList);
             
            controller.setMainApp(this);
            
         }
         
-    }
+    }*/
 }

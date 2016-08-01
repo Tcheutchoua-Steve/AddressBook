@@ -35,7 +35,7 @@ public class DateUtil {
     }
 
     /**
-     * Converts a String in the format "dd/MM/YY" to a Calendar object.
+     * Converts a String in the format "dd/MM/yy" to a Calendar object.
      * 
      * Returns null if the String could not be converted.
      * 

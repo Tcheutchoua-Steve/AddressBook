@@ -1,10 +1,9 @@
-dev\mars\addressbook\FXMLController$1.class
+dev\mars\addressbook\controller\AddressController$1.class
+dev\mars\addressbook\util\ContactParser$Headers.class
+dev\mars\addressbook\controller\AddressController.class
 dev\mars\addressbook\MainApp.class
 dev\mars\addressbook\util\GenderFormatException.class
-dev\mars\addressbook\util\ContactParser.class
-dev\mars\addressbook\FXMLController.class
-dev\mars\addressbook\util\ContactParser$Headers.class
-dev\mars\addressbook\controller\AgeDifferenceSelectorController.class
 dev\mars\addressbook\util\DateUtil.class
+dev\mars\addressbook\util\ContactParser.class
 dev\mars\addressbook\util\ContactGender.class
 dev\mars\addressbook\model\Contact.class
